@@ -30,6 +30,7 @@ public class Evento {
     @Column(name = "dt_evento")
     private Date dtEvento;
 
+    @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario organizador;
 
