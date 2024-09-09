@@ -26,10 +26,12 @@ public class Anuncio {
 
     private int quant;
 
-    //    id_usuario INT REFERENCES Usuario(id_usuario),
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
     private Usuario usuarioId;
 
-    //    id_estado INT REFERENCES Estado(id_estado)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_estado",referencedColumnName = "id_estado")
     private Estado estadoId;
 
 }

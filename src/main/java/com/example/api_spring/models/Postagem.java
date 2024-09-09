@@ -28,9 +28,7 @@ public class Postagem {
 
     private String imagem;
 
-    @ManyToOne(
-    )
-    @Column(name = "id_usuario")
-    @JoinColumn(name = "id_usuario")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario idUsuario;
 }

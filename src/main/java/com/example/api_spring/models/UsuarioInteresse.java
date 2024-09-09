@@ -13,9 +13,12 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "usuario_interesse")
 public class UsuarioInteresse {
-    // TODO: RELACIONAMENTO
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
+
+    @Id
+    @Column(name = "id_usuario_interesse")
+    private int idUsuarioInteresse;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario idUsuario;
 
     @Size(max = 200,message = "")

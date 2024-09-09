@@ -33,7 +33,7 @@ public class Forum {
     // TODO: Ver se o usuario linka aqui (provavelmente sim)
     private int usuarioResp;
 
-    @Column(name = "id_usuario")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
     private Usuario idUsuario;
 
