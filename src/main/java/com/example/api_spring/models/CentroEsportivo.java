@@ -27,9 +27,7 @@ public class CentroEsportivo {
 
     @Size(max = 300)
     private String descricao;
-
-    // TODO: RELACIONAMENTO
-    @ManyToOne
-    @JoinColumn(name = "id_local")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_local")
     private Local idLocal;
 }

@@ -30,6 +30,7 @@ public class Notificacao {
     private String conteudo;
 
     // TODO: Colocar relacionamento
-    @JoinColumn(name = "id_usuario")
-    private Usuario idUsuario;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
+    private Usuario usuarioId;
 }
