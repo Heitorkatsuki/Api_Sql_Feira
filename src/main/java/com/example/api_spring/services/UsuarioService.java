@@ -15,7 +15,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // TODO: ESQUECI A SENHA/ MUDAR A SENHA, RETORNAR LOGIN, GETUSER 
+    // TODO: ESQUECI A SENHA/, RETORNAR LOGIN, GETUSER
 
     public ApiResponse cadastrarUsuario(Usuario usuario){
         try {
@@ -28,6 +28,23 @@ public class UsuarioService {
         }
     }
 
+    public ApiResponse mudarSenha(String email, String senha){
+        try {
+            Usuario usuario = usuarioRepository.findByEmail(email);
+            if (usuario != null){
+                usuario.setSenha(senha);
+                Usuario usuarioModificado = usuarioRepository.save(usuario);
+                List<Object> usuarioList = new ArrayList<>();
+                usuarioList.add(usuarioModificado);
+                return new ApiResponse(true, "Senha do usuario de email " +email+"alterada com sucesso", usuarioList, null);
+            }else{
+                return new ApiResponse(false, "Usuário não encontrado no banco", null, null);
+            }
+        }catch (Exception exception){
+            return new ApiResponse(false, "Falha ao buscar usuário", null, null);
+        }
+    }
 
+    // TODO: PERGUNATAR SE A BUSCA DE USUARIO NO APP SERÁ FEITA NO BANCO
 
 }

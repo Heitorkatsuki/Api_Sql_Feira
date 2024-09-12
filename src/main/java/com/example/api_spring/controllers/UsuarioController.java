@@ -56,6 +56,16 @@ public class UsuarioController {
         }
     }
 
+    @PatchMapping("/mudarSenha/{email}/{novaSenha}")
+    public ResponseEntity<ApiResponse> mudarSenha(@PathVariable String email, @PathVariable String novaSenha){
+        ApiResponse response = usuarioService.mudarSenha(email, novaSenha);
+        if (response.isResponseSucessfull()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
     public static boolean isNotIdFine(int id){
         return id <= 0;
     }
