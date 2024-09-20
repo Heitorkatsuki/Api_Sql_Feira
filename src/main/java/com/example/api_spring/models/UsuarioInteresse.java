@@ -16,7 +16,7 @@ public class UsuarioInteresse {
 
     @Id
     @Column(name = "id_usuario_interesse")
-    private int idUsuarioInteresse;
+    private Long idUsuarioInteresse;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario idUsuario;

@@ -23,7 +23,8 @@ public class Local {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idLocal;
+    @Column(name = "id_local")
+    private Long idLocal;
 
     private int num;
 
@@ -39,7 +40,7 @@ public class Local {
     private String coordenada;
 
     //TODO: PERGUNTAR PQ O CEP N É STRING
-    private int cep;
+    private Long cep;
 
     // private Estado idEstado
 

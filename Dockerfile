@@ -1,9 +1,9 @@
-FROM maven:3.8.6-amazoncorretto-17 as build
-WORKDIR /app
+FROM maven:3.8.3-openjdk-17 AS build
 COPY . .
-RUN mvn clean package -X -DskipTests
+RUN mvn clean package -DskipTests
 
-FROM openjdk:17-ea-10-jdk-slim
-WORKDIR /app
-COPY --from=build ./app/target/*.jar ./api_athleta.jar
-ENTRYPOINT java -jar api_athleta.jar
+
+FROM openjdk:17-jdk-slim
+COPY --from=build /target/API_SPRING-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
