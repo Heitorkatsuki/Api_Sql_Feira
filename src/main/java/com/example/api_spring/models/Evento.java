@@ -18,7 +18,7 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_evento;
+    private Long id_evento;
 
     @NotNull
     @Size(max = 40)
@@ -29,10 +29,6 @@ public class Evento {
 
     @Column(name = "dt_evento")
     private Date dtEvento;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario organizador;
 
     @Size(max = 200, message = "")
     private String img;

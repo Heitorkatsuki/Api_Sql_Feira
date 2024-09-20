@@ -22,10 +22,9 @@ public class Usuario {
     // TODO: Colocar o @generated para o campo se autocompletar, o @ deve ser colocado logo apos o @ id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Schema(description = "Id único do usuário", example = "123")
     @Column(name = "id_usuario")
-    private int idUsuario;
+    private Long idUsuario;
 
     @NotNull
     @Size(max = 40, message = "Seu nome deve conter no maximo 40 caracteres")

@@ -17,7 +17,7 @@ public class Esporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_esporte")
-    private int idEsporte;
+    private Long idEsporte;
 
     @NotNull
     @Size(max = 40, message = "O nome do esperte não pode ter mais do que 40 caracteres")

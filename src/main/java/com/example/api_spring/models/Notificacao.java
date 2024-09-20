@@ -18,7 +18,7 @@ public class Notificacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_notificacao")
-    private int idNotificacao;
+    private Long idNotificacao;
 
     @Size(max = 20, message = "O tipo deve conter no maximo 20 caracteres")
     private String tipo;

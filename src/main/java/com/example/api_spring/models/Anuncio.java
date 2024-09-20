@@ -17,7 +17,7 @@ public class Anuncio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_anuncio")
-    private int idAnuncio;
+    private Long idAnuncio;
 
     private double preco;
 

@@ -16,17 +16,15 @@ public class EsporteCentroEsportivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_esporte_centro")
-    private int idEsporteCentro;
+    private Long idEsporteCentro;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_esporte")
-    @Column(name = "id_esporte")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_esporte", referencedColumnName = "id_esporte")
     private Esporte idEsporte;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_centro")
-    @Column(name = "id_centro")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_centro", referencedColumnName = "id_centro")
     private CentroEsportivo idCentro;
 }

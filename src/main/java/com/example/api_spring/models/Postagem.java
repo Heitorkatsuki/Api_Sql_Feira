@@ -18,7 +18,7 @@ public class Postagem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_postagem")
-    private int idPostagem;
+    private Long idPostagem;
 
     @Size(max = 200, message = "O texto da postagem deve conter no maximo 200 caracteres")
     private String texto;

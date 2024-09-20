@@ -16,7 +16,7 @@ public class CentroEsportivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_centro")
-    private int idCentro;
+    private Long idCentro;
 
     @NotNull
     @Size(max = 40,message = "")
