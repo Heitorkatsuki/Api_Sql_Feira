@@ -15,6 +15,7 @@ import lombok.*;
 public class UsuarioInteresse {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario_interesse")
     private Long idUsuarioInteresse;
     @ManyToOne(cascade = CascadeType.ALL)
