@@ -44,4 +44,10 @@ public class Usuario {
     // TODO: Constraint
     @Column(name = "dt_nasc")
     private Date dtNasc;
+
+    @NotNull
+    private String username;
+
+    @Column(name = "foto_perfil")
+    private String fotoPerfil;
 }
