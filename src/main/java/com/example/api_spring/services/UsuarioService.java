@@ -1,13 +1,8 @@
-package com.example.api_spring.services;
+package com.example.api_spring.postgresql.services;
 
-import com.example.api_spring.models.ApiResponse;
-import com.example.api_spring.models.Usuario;
-import com.example.api_spring.models.UsuarioInteresse;
-import com.example.api_spring.repositories.UsuarioRepository;
-import jakarta.transaction.Transactional;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.api_spring.postgresql.models.ApiResponse;
+import com.example.api_spring.postgresql.models.Usuario;
+import com.example.api_spring.postgresql.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +16,10 @@ public class UsuarioService {
     }
 
     // TODO: ESQUECI A SENHA/, RETORNAR LOGIN, GETUSER
+
+    public List<Usuario> listarUsuarios(){
+        return usuarioRepository.findAll();
+    }
 
     public Usuario cadastrarUsuario(Usuario usuario){
         //usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));

@@ -1,7 +1,7 @@
-package com.example.api_spring.entities;
+package com.example.api_spring.postgresql.entities;
 
-import com.example.api_spring.models.Usuario;
-import com.example.api_spring.models.UsuarioInteresse;
+import com.example.api_spring.postgresql.models.Usuario;
+import com.example.api_spring.postgresql.models.UsuarioInteresse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

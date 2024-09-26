@@ -1,4 +1,4 @@
-package com.example.api_spring.models;
+package com.example.api_spring.postgresql.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
