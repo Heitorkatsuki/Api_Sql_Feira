@@ -46,6 +46,7 @@ public class Usuario {
     private Date dtNasc;
 
     @NotNull
+    @Size(max = 25, message = "Seu nome de usuário deve contar no máximo 25 caracteres")
     private String username;
 
     @Column(name = "foto_perfil")
