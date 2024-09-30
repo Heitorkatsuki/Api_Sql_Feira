@@ -1,26 +1,16 @@
 package com.example.api_spring.controllers;
 
-import com.example.api_spring.entities.LoginRequest;
-import com.example.api_spring.entities.UsuarioRequest;
 import com.example.api_spring.models.ApiResponse;
 import com.example.api_spring.models.Usuario;
 import com.example.api_spring.services.UsuarioService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Password;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.crypto.SecretKey;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -70,25 +60,37 @@ public class UsuarioController {
 //        }
 //    }
 
-//    @PostMapping("/adicionar")
-//    public ResponseEntity<Usuario> adicionarUsuario(@Valid @RequestBody Usuario usuario) {
-//        //try {
-//            Usuario savedUserRole = usuarioService.cadastrarUsuario(usuario);
-//            return ResponseEntity.status(HttpStatus.CREATED).body(savedUserRole);
-////        } catch (DataIntegrityViolationException dive) {
-////            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
-////        }
-//    }
-
     @PostMapping("/adicionar")
-    public ResponseEntity<?> adicionarUsuario(@Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> adicionarUsuario(@Valid @RequestBody Usuario usuario) {
         try {
             Usuario savedUserRole = usuarioService.cadastrarUsuario(usuario);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedUserRole);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao adicionar usuário: " + e.getMessage());
+      } catch (DataIntegrityViolationException dive) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
     }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarUsuarios(){
+        try {
+            List<Usuario> listaSalva = usuarioService.listarUsuarios();
+            return ResponseEntity.status(HttpStatus.CREATED).body(listaSalva);
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao adicionar usuário: \n" + e.getMessage());
+        }
+
+    }
+
+//    @PostMapping("/adicionar")
+//    public ResponseEntity<?> adicionarUsuario(@Valid @RequestBody Usuario usuario) {
+//        try {
+//            Usuario usuarioSalvo = usuarioService.cadastrarUsuario(usuario);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao adicionar usuário: \n" + e.getMessage());
+//        }
+//    }
 
 
 //    @PostMapping("/adicionarProcedure")
