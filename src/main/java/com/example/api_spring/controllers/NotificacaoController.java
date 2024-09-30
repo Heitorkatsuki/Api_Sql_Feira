@@ -1,7 +1,7 @@
-package com.example.api_spring.postgresql.controllers;
+package com.example.api_spring.controllers;
 
-import com.example.api_spring.postgresql.models.ApiResponse;
-import com.example.api_spring.postgresql.services.NotificacaoService;
+import com.example.api_spring.models.ApiResponse;
+import com.example.api_spring.services.NotificacaoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

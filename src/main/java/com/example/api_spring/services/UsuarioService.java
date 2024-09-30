@@ -1,8 +1,8 @@
-package com.example.api_spring.postgresql.services;
+package com.example.api_spring.services;
 
-import com.example.api_spring.postgresql.models.ApiResponse;
-import com.example.api_spring.postgresql.models.Usuario;
-import com.example.api_spring.postgresql.repositories.UsuarioRepository;
+import com.example.api_spring.models.ApiResponse;
+import com.example.api_spring.models.Usuario;
+import com.example.api_spring.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

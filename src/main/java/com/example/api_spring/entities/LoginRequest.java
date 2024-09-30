@@ -1,4 +1,4 @@
-package com.example.api_spring.postgresql.entities;
+package com.example.api_spring.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,8 @@
-package com.example.api_spring.postgresql.controllers;
+package com.example.api_spring.controllers;
 
-import com.example.api_spring.postgresql.models.ApiResponse;
-import com.example.api_spring.postgresql.models.Usuario;
-import com.example.api_spring.postgresql.services.UsuarioService;
+import com.example.api_spring.models.ApiResponse;
+import com.example.api_spring.models.Usuario;
+import com.example.api_spring.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

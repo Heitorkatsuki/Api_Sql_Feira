@@ -1,8 +1,8 @@
-package com.example.api_spring.postgresql.services;
-import com.example.api_spring.postgresql.models.ApiResponse;
-import com.example.api_spring.postgresql.models.Notificacao;
-import com.example.api_spring.postgresql.models.Usuario;
-import com.example.api_spring.postgresql.repositories.NotificacaoRepository;
+package com.example.api_spring.services;
+import com.example.api_spring.models.ApiResponse;
+import com.example.api_spring.models.Notificacao;
+import com.example.api_spring.models.Usuario;
+import com.example.api_spring.repositories.NotificacaoRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
