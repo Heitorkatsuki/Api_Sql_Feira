@@ -15,6 +15,6 @@ public class UsuarioInteresseService {
     }
 
     public UsuarioInteresse findbyUsuarioId(Usuario usuario){
-        return usuarioInteresseRepository.findByIdUsuario(usuario);
+        return usuarioInteresseRepository.findByIdUsuario(usuario.getIdUsuario());
     }
 }

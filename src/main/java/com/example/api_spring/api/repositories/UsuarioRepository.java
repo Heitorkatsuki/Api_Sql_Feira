@@ -20,5 +20,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     @Query("SELECT u FROM Usuario u JOIN u.roles r WHERE r.id = :roleId")
     Usuario findByRoleId(@Param("roleId") Long roleId);
 //    @Procedure
-//    Usuario inserir_usuario_e_interesse(Usuario usuario, UsuarioInteresse usuarioInteresse);
+//    Usuario inserir_usua       nrio_e_interesse(Usuario usuario, UsuarioInteresse usuarioInteresse);
 }

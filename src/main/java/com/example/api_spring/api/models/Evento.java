@@ -33,11 +33,9 @@ public class Evento {
     @Size(max = 200, message = "")
     private String img;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organizador",referencedColumnName = "id_usuario")
-    private Usuario organizador;
+    @Column(name = "organizador")
+    private Long organizador;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_local",referencedColumnName = "id_local")
-    private Local idLocal;
+    @Column(name = "id_local")
+    private Long idLocal;
 }

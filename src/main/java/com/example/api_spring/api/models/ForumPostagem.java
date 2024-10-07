@@ -15,11 +15,10 @@ public class ForumPostagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_forum_postagem")
     private int idForumPostagem;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_forum", referencedColumnName = "id_forum")
-    private Forum idForum;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_postagem", referencedColumnName = "id_postagem")
-    private Postagem idPostagem;
+    @Column(name = "id_forum")
+    private Long idForum;
+
+    @Column(name = "id_postagem")
+    private Long idPostagem;
 }

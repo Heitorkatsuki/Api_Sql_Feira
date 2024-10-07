@@ -18,9 +18,9 @@ public class UsuarioInteresse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario_interesse")
     private Long idUsuarioInteresse;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-    private Usuario idUsuario;
+
+    @Column(name = "id_usuario")
+    private Long idUsuario;
 
     @Size(max = 200,message = "")
     private String interesse;

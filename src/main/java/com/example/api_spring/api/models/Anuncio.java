@@ -35,14 +35,12 @@ public class Anuncio {
     @Schema(description = "Quantidade disponível no anúncio", example = "5")
     private int quant;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @Column(name = "id_usuario")
     @Schema(description = "Usuário que criou o anúncio")
-    private Usuario idUsuario;
+    private Long idUsuario;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
+    @JoinColumn(name = "id_estado")
     @Schema(description = "Estado onde o anúncio está disponível")
-    private Estado idEstado;
+    private Long idEstado;
 }
 

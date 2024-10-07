@@ -36,9 +36,7 @@ public class Local {
     @Size(min = 8, max = 9)
     private String cep;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_estado",referencedColumnName = "id_estado")
-    private Estado idEstado;
+    @Column(name = "id_estado")
+    private Long idEstado;
 
 }

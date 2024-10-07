@@ -5,5 +5,5 @@ import com.example.api_spring.api.models.UsuarioInteresse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioInteresseRepository extends JpaRepository<UsuarioInteresse,Long> {
-    UsuarioInteresse findByIdUsuario(Usuario usuario);
+    UsuarioInteresse findByIdUsuario(Long usuario);
 }

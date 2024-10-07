@@ -19,7 +19,7 @@ public class NotificacaoService {
         try{
             Usuario usuario = new Usuario();
             usuario.setIdUsuario(Long.parseLong(userid));
-            List<Notificacao> notificacoes = notificacaoRepository.findNotificacaoByIdUsuario(usuario);
+            List<Notificacao> notificacoes = notificacaoRepository.findNotificacaoByIdUsuario(usuario.getIdUsuario());
             List<Object> listaObjetos = notificacoes.stream()
                     .map(notificacao -> (Object) notificacao)
                     .toList();
