@@ -29,9 +29,8 @@ public class Forum {
     @Size(max = 500)
     private String imgFundo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_resp", referencedColumnName = "id_usuario")
-    private Usuario usuarioResp;
+    @Column(name = "usuario_resp")
+    private Long usuarioResp;
 
     @Column(name = "img_forum")
     @Size(max = 500)

@@ -18,13 +18,10 @@ public class EsporteCentroEsportivo {
     @Column(name = "id_esporte_centro")
     private Long idEsporteCentro;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_esporte", referencedColumnName = "id_esporte")
-    private Esporte idEsporte;
+    @Column(name = "id_esporte")
+    private Long idEsporte;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_centro", referencedColumnName = "id_centro")
-    private CentroEsportivo idCentro;
+    @Column(name = "id_centro")
+    private Long idCentro;
 }
