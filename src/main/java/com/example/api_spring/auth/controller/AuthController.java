@@ -23,13 +23,11 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     public final SecretKey secretKey;
     private final UsuarioService usuarioService;
-    private final UsuarioInteresseService usuarioInteresseService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(SecretKey secretKey, UsuarioService usuarioService, UsuarioInteresseService usuarioInteresseService, PasswordEncoder passwordEncoder) {
+    public AuthController(SecretKey secretKey, UsuarioService usuarioService, PasswordEncoder passwordEncoder) {
         this.secretKey = secretKey;
         this.usuarioService = usuarioService;
-        this.usuarioInteresseService = usuarioInteresseService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -42,7 +40,7 @@ public class AuthController {
                 try {
                     String token = Jwts.builder()
                             .setSubject(login.getUsername())
-                            .claim("user_role", usuario.getRoles().iterator().next().getId())
+                            .claim("user_role", usuario.getRoles().iterator().next().getRoleName())
                             .setExpiration(new Date(System.currentTimeMillis() + 86_400_000))
                             .signWith(secretKey, SignatureAlgorithm.HS512)
                             .compact();

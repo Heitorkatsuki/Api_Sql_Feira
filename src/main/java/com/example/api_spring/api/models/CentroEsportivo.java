@@ -30,4 +30,6 @@ public class CentroEsportivo {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_local")
     private Local idLocal;
+
+
 }

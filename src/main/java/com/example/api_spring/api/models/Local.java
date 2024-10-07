@@ -13,13 +13,6 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "local")
 public class Local {
-//    id_local serial PRIMARY KEY,
-//    num INT,
-//    rua VARCHAR(100) NOT NULL,
-//    cidade VARCHAR(50) NOT NULL,
-//    coordenada VARCHAR(30),
-//    cep INT,
-//    id_estado INT REFERENCES Estado(id_estado)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +33,12 @@ public class Local {
     private String coordenada;
 
     //TODO: PERGUNTAR PQ O CEP N É STRING
-    private Long cep;
+    @Size(min = 8, max = 9)
+    private String cep;
 
-    // private Estado idEstado
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_estado",referencedColumnName = "id_estado")
+    private Estado idEstado;
 
 }
