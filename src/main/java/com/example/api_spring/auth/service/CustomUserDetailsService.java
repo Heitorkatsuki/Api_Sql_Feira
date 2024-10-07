@@ -21,7 +21,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioService.findByUsername(username);
-        Usuario usuarioRole = usuarioService.findByRoleId(usuario.getRoles());
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuário não encontrado");
+        }
+
+        // Pega o primeiro papel do usuário
+        String roleName = usuario.getRoles().iterator().next().getRoleName();
 
         return new org.springframework.security.core.userdetails.User(
                 usuario.getUsername(),
@@ -30,7 +35,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + usuarioRole.getRoles().iterator().next().getRoleName()))
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + usuario.getRoles().iterator().next().getRoleName()))
         );
     }
+
 }

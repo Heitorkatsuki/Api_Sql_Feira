@@ -1,7 +1,7 @@
 package com.example.api_spring.api.controllers;
 
 import com.example.api_spring.api.services.UsuarioService;
-import com.example.api_spring.api.models.ApiResponse;
+import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,8 +19,6 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final Validator validator;
-
-//    private final SecretKey secretKey;
 
     public UsuarioController(UsuarioService usuarioService, Validator validator) {
         this.usuarioService = usuarioService;
@@ -61,12 +59,12 @@ public class UsuarioController {
 //    }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Usuario> adicionarUsuario(@Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<ApiResponseAthleta> adicionarUsuario(@Valid @RequestBody Usuario usuario) {
         try {
-            Usuario savedUserRole = usuarioService.cadastrarUsuario(usuario);
+            ApiResponseAthleta savedUserRole = usuarioService.cadastrarUsuario(usuario);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedUserRole);
       } catch (DataIntegrityViolationException dive) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body( new ApiResponseAthleta(false, "Error", null, null));
         }
     }
 
@@ -119,8 +117,8 @@ public class UsuarioController {
 
 
     @PatchMapping("/mudarSenha/{email}/{novaSenha}")
-    public ResponseEntity<ApiResponse> mudarSenha(@PathVariable String email, @PathVariable String novaSenha){
-        ApiResponse response = usuarioService.mudarSenha(email, novaSenha);
+    public ResponseEntity<ApiResponseAthleta> mudarSenha(@PathVariable String email, @PathVariable String novaSenha){
+        ApiResponseAthleta response = usuarioService.mudarSenha(email, novaSenha);
         if (response.isResponseSucessfull()){
             return ResponseEntity.ok(response);
         }else{

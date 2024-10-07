@@ -32,5 +32,5 @@ public class Notificacao {
     // TODO: Colocar relacionamento
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
-    private Usuario usuarioId;
+    private Usuario idUsuario;
 }

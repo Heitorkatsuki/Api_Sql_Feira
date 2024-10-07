@@ -1,6 +1,6 @@
 package com.example.api_spring.api.services;
 
-import com.example.api_spring.api.models.ApiResponse;
+import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Roles;
 import com.example.api_spring.api.models.Usuario;
 import com.example.api_spring.api.repositories.UsuarioRepository;
@@ -24,14 +24,13 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario cadastrarUsuario(Usuario usuario){
-        //usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+    public ApiResponseAthleta cadastrarUsuario(Usuario usuario){
         usuario.setNome(usuario.getNome().strip().toUpperCase());
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-        return usuarioRepository.save(usuario);
-//            List<Object> usuariosList = new ArrayList<>();
-//            usuariosList.add(usuarioResponse);
-            //return new ApiResponse(true, "Usuário inserido com sucesso", usuariosList, null);
+        Usuario usuarioResponse =  usuarioRepository.save(usuario);
+        List<Object> usuariosList = new ArrayList<>();
+        usuariosList.add(usuarioResponse);
+        return new ApiResponseAthleta(true, "Usuário inserido com sucesso", usuariosList, null);
     }
 
 //    public ApiResponse cadastrarUsuarioProcedure(Usuario usuario, UsuarioInteresse usuarioInteresse){
@@ -45,7 +44,7 @@ public class UsuarioService {
 //        }
 //    }
 
-    public ApiResponse mudarSenha(String email, String senha){
+    public ApiResponseAthleta mudarSenha(String email, String senha){
         try {
             Usuario usuario = usuarioRepository.findByEmail(email);
             if (usuario != null){
@@ -53,12 +52,12 @@ public class UsuarioService {
                 Usuario usuarioModificado = usuarioRepository.save(usuario);
                 List<Object> usuarioList = new ArrayList<>();
                 usuarioList.add(usuarioModificado);
-                return new ApiResponse(true, "Senha do usuario de email " +email+"alterada com sucesso", usuarioList, null);
+                return new ApiResponseAthleta(true, "Senha do usuario de email " +email+"alterada com sucesso", usuarioList, null);
             }else{
-                return new ApiResponse(false, "Usuário não encontrado no banco", null, null);
+                return new ApiResponseAthleta(false, "Usuário não encontrado no banco", null, null);
             }
         }catch (Exception exception){
-            return new ApiResponse(false, "Falha ao buscar usuário", null, null);
+            return new ApiResponseAthleta(false, "Falha ao buscar usuário", null, null);
         }
     }
 

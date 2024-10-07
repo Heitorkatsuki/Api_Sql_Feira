@@ -1,6 +1,6 @@
 package com.example.api_spring.api.services;
 import com.example.api_spring.api.repositories.NotificacaoRepository;
-import com.example.api_spring.api.models.ApiResponse;
+import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Notificacao;
 import com.example.api_spring.api.models.Usuario;
 import org.springframework.stereotype.Service;
@@ -15,28 +15,28 @@ public class NotificacaoService {
         this.notificacaoRepository = notificacaoRepository;
     }
 
-    public ApiResponse listarNotificacoesPorUsuario(String userid){
+    public ApiResponseAthleta listarNotificacoesPorUsuario(String userid){
         try{
             Usuario usuario = new Usuario();
             usuario.setIdUsuario(Long.parseLong(userid));
-            List<Notificacao> notificacoes = notificacaoRepository.findNotificacaoByUsuarioId(usuario);
+            List<Notificacao> notificacoes = notificacaoRepository.findNotificacaoByIdUsuario(usuario);
             List<Object> listaObjetos = notificacoes.stream()
                     .map(notificacao -> (Object) notificacao)
                     .toList();
-            return new ApiResponse(true, "Notificações retornadas com sucesso", listaObjetos, null);
+            return new ApiResponseAthleta(true, "Notificações retornadas com sucesso", listaObjetos, null);
         }catch (Exception e){
-            return new ApiResponse(false, "Falha ao retornar notificações", null, null);
+            return new ApiResponseAthleta(false, "Falha ao retornar notificações", null, null);
         }
     }
 
-    public ApiResponse inserirNotificacao(Notificacao notificacao){
+    public ApiResponseAthleta inserirNotificacao(Notificacao notificacao){
         try{
             Notificacao notificacaoResponse = notificacaoRepository.save(notificacao);
             List<Object> notificacaoList = new ArrayList<>();
             notificacaoList.add(notificacaoResponse);
-            return new ApiResponse(true, "Notificação inserida com sucesso", notificacaoList, null);
+            return new ApiResponseAthleta(true, "Notificação inserida com sucesso", notificacaoList, null);
         }catch (Exception e){
-            return new ApiResponse(false, "Não foi possível inserir a notificação", null, null);
+            return new ApiResponseAthleta(false, "Não foi possível inserir a notificação", null, null);
         }
     }
 }

@@ -27,5 +27,6 @@ public class Esporte {
     private String descricao;
 
     @NotNull
+    @Column(name = "como_pratica")
     private String comoPratica;
 }

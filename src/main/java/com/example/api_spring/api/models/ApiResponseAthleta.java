@@ -9,7 +9,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApiResponse {
+public class ApiResponseAthleta {
     private boolean responseSucessfull;
     private String description;
     private List<Object> object;

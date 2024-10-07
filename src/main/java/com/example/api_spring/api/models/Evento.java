@@ -34,8 +34,8 @@ public class Evento {
     private String img;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
-    private Usuario usuarioId;
+    @JoinColumn(name = "organizador",referencedColumnName = "id_usuario")
+    private Usuario organizador;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_local",referencedColumnName = "id_local")
