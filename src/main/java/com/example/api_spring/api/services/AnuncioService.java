@@ -20,25 +20,29 @@ public class AnuncioService {
     public ApiResponseAthleta listarAnuncios(){
         try {
             List<Anuncio> anuncios = anuncioRepository.findAll();
-            List<Object> listaObjetos = anuncios.stream()
-                    .map(notificacao -> (Object) notificacao)
-                    .toList();
-            return new ApiResponseAthleta(true, "Anuncios retornados com sucesso!", listaObjetos, null);
-        }
-        catch (Exception e){
+            System.out.println("Número de anúncios encontrados: " + anuncios.size());
+            if (!anuncios.isEmpty()){
+                List<Object> listaObjetos = anuncios.stream()
+                        .map(anuncio -> (Object) anuncio)
+                        .toList();
+                return new ApiResponseAthleta(true, "Anuncios retornados com sucesso!", listaObjetos, null);
+            }
+            return new ApiResponseAthleta(false, "Não há anuncios no banco", null, "Vazio");
+        } catch (Exception e){
             return new ApiResponseAthleta(false, "Falha ao retornar notificações", null, null);
         }
     }
 
     public ApiResponseAthleta listarAnuncioPorId(Long id){
-
         try {
             Anuncio response = anuncioRepository.findAnuncioByIdAnuncio(id);
-            List<Object> anuncioList = new ArrayList<>();
-            anuncioList.add(response);
-            return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
-        }
-        catch (Exception e){
+            if(response != null){
+                List<Object> anuncioList = new ArrayList<>();
+                anuncioList.add(response);
+                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
+            }
+            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, "Vazio");
+        } catch (Exception e){
             return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
         }
     }
@@ -51,6 +55,15 @@ public class AnuncioService {
             return new ApiResponseAthleta(true, "Notificação inserida com sucesso", anuncioList, null);
         }catch (Exception e){
             return new ApiResponseAthleta(false, "Não foi possível inserir a notificação", null, null);
+        }
+    }
+
+    public ApiResponseAthleta excluirPorId(Long idAnuncio){
+        try{
+            anuncioRepository.deleteAnuncioByIdAnuncio(idAnuncio);
+            return new ApiResponseAthleta(true, "Anuncio excluido com sucesso", null, null);
+        }catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível excluir o notificação", null, null);
         }
     }
 }
