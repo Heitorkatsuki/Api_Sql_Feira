@@ -20,7 +20,6 @@ public class AnuncioService {
     public ApiResponseAthleta listarAnuncios(){
         try {
             List<Anuncio> anuncios = anuncioRepository.findAll();
-            System.out.println("Número de anúncios encontrados: " + anuncios.size());
             if (!anuncios.isEmpty()){
                 List<Object> listaObjetos = anuncios.stream()
                         .map(anuncio -> (Object) anuncio)
