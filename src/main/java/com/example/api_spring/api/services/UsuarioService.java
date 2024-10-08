@@ -20,8 +20,16 @@ public class UsuarioService {
 
     // TODO: ESQUECI A SENHA/, RETORNAR LOGIN, GETUSER
 
-    public List<Usuario> listarUsuarios(){
-        return usuarioRepository.findAll();
+    public ApiResponseAthleta listarUsuarios() {
+        try {
+            List<Usuario> response = usuarioRepository.findAll();
+            List<Object> listaObjetos = response.stream()
+                    .map(usuario -> (Object) usuario)
+                    .toList();
+            return new ApiResponseAthleta(true, "Anuncios retornados com sucesso!", listaObjetos, null);
+        } catch (Exception e) {
+            return new ApiResponseAthleta(false, "Falha ao retornar notificações", null, null);
+        }
     }
 
     public ApiResponseAthleta cadastrarUsuario(Usuario usuario){
@@ -64,16 +72,26 @@ public class UsuarioService {
     public Usuario findByUsername(String username){
         return usuarioRepository.findByUsername(username);
     }
-
-    // TODO: PERGUNATAR SE A BUSCA DE USUARIO NO APP SERÁ FEITA NO BANCO
+    public ApiResponseAthleta findByUsernameResponse(String username){
+        try{
+            Usuario response = usuarioRepository.findByUsername(username);
+            if(response != null){
+                List<Object> anuncioList = new ArrayList<>();
+                anuncioList.add(response);
+                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
+            }
+            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, null);
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
+        }
+    }
 
     public Usuario findByRoleId(Set<Roles> roles) {
-        // Aqui assumo que você quer buscar pelo primeiro role na lista
         if (roles != null && !roles.isEmpty()) {
-            Roles role = roles.iterator().next(); // Pega o primeiro role da lista
+            Roles role = roles.iterator().next();
             return usuarioRepository.findByRoleId(role.getId());
         }
-        return null; // Ou lançar uma exceção ou tratar de outra forma
+        return null;
     }
 
 }
