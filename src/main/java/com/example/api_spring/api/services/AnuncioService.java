@@ -28,7 +28,7 @@ public class AnuncioService {
             }
             return new ApiResponseAthleta(false, "Não há anuncios no banco", null, "Vazio");
         } catch (Exception e){
-            return new ApiResponseAthleta(false, "Falha ao retornar notificações", null, null);
+            return new ApiResponseAthleta(false, "Falha ao retornar anuncios", null, null);
         }
     }
 
@@ -51,9 +51,9 @@ public class AnuncioService {
             Anuncio anuncioResponse = anuncioRepository.save(anuncio);
             List<Object> anuncioList = new ArrayList<>();
             anuncioList.add(anuncioResponse);
-            return new ApiResponseAthleta(true, "Notificação inserida com sucesso", anuncioList, null);
+            return new ApiResponseAthleta(true, "Anuncio inserido com sucesso", anuncioList, null);
         }catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível inserir a notificação", null, null);
+            return new ApiResponseAthleta(false, "Não foi possível inserir o anuncio", null, null);
         }
     }
 
@@ -62,7 +62,7 @@ public class AnuncioService {
             anuncioRepository.deleteAnuncioByIdAnuncio(idAnuncio);
             return new ApiResponseAthleta(true, "Anuncio excluido com sucesso", null, null);
         }catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível excluir o notificação", null, null);
+            return new ApiResponseAthleta(false, "Não foi possível excluir o anuncio", null, null);
         }
     }
 }
