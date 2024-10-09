@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +59,7 @@ public class NotificacaoController {
     })
     public ResponseEntity<ApiResponseAthleta> adicionarNotificacao(
             @Parameter(description = "Dados da notificação a ser adicionada.", required = true)
-            @RequestBody Notificacao notificacao) {
+            @Valid @RequestBody Notificacao notificacao) {
         try {
             ApiResponseAthleta notificacaoSalva = notificacaoService.inserirNotificacao(notificacao);
             return ResponseEntity.status(HttpStatus.CREATED).body(notificacaoSalva);
