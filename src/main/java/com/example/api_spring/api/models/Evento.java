@@ -18,7 +18,8 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_evento;
+    @Column(name = "id_evento")
+    private Long idEvento;
 
     @NotNull
     @Size(max = 40)
