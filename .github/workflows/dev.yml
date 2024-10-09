@@ -10,9 +10,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
@@ -35,6 +33,6 @@ jobs:
       uses: johnbeynon/render-deploy-action@v0.0.8
       with:
         # ID of the service to deploy
-        service-id: ${{secrets.secrets_id}}
+        service-id: ${{secrets.id_dev}}
         # A Render API key
-        api-key: ${{secrets.secrets_key}}
+        api-key: ${{secrets.key}}
