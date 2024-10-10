@@ -39,7 +39,7 @@ public class Anuncio {
     @Schema(description = "Usuário que criou o anúncio")
     private Long idUsuario;
 
-    @JoinColumn(name = "id_estado")
+    @Column(name = "id_estado")
     @Schema(description = "Estado onde o anúncio está disponível")
     private Long idEstado;
 }
