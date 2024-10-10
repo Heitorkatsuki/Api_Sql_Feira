@@ -89,4 +89,14 @@ public class UsuarioController {
         }
     }
 
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<ApiResponseAthleta> atualizarUsuario(@RequestBody Usuario usuario, @PathVariable String id){
+        try{
+            ApiResponseAthleta response = usuarioService.atualizarUsuario(usuario,Long.parseLong(id));
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (DataIntegrityViolationException dive) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body( new ApiResponseAthleta(false, "Error", null, null));
+        }
+    }
+
 }
