@@ -94,4 +94,22 @@ public class UsuarioService {
         return null;
     }
 
+    public ApiResponseAthleta atualizarUsuario(Usuario usuarioNovo, Long id){
+        try{
+            Usuario usuario = usuarioRepository.findUsuarioByIdUsuario(id);
+            usuario.setNome(usuarioNovo.getNome());
+            usuario.setEmail(usuarioNovo.getEmail());
+            usuario.setRoles(usuarioNovo.getRoles());
+            usuario.setUsername(usuarioNovo.getUsername());
+            usuario.setDtNasc(usuarioNovo.getDtNasc());
+            usuario.setFotoPerfil(usuarioNovo.getFotoPerfil());
+            Usuario response = usuarioRepository.save(usuario);
+            List<Object> postagemList = new ArrayList<>();
+            postagemList.add(response);
+            return new ApiResponseAthleta(true, "Usuario atualizado com sucesso", postagemList, null);
+        }catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível atualizar o usuario", null, null);
+        }
+    }
+
 }
