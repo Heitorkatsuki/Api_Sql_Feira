@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class Usuario {
     private String senha;
 
     @NotNull
+    @Past(message = "A data de nascimento deve ser uma data passada")
     // TODO: Constraint
     @Column(name = "dt_nasc")
     private Date dtNasc;
