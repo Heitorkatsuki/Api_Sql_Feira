@@ -1,5 +1,6 @@
 package com.example.api_spring.api.controllers;
 
+import com.example.api_spring.api.entities.LoginEmailRequest;
 import com.example.api_spring.api.services.UsuarioService;
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Usuario;
@@ -77,9 +78,9 @@ public class UsuarioController {
 //    }
 
 
-    @PatchMapping("/mudarSenha/{email}/{novaSenha}")
-    public ResponseEntity<ApiResponseAthleta> mudarSenha(@PathVariable String email, @PathVariable String novaSenha){
-        ApiResponseAthleta response = usuarioService.mudarSenha(email, novaSenha);
+    @PutMapping("/mudarSenha")
+    public ResponseEntity<ApiResponseAthleta> mudarSenha(@RequestBody LoginEmailRequest login){
+        ApiResponseAthleta response = usuarioService.mudarSenha(login.getEmail(), login.getSenha());
         if (response.isResponseSucessfull()){
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }else{
