@@ -3,6 +3,7 @@ package com.example.api_spring.api.controllers;
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.services.CentroEsportivoService;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.QueryTimeoutException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +28,8 @@ public class CentroEsportivoController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (DataIntegrityViolationException dive){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Error", null, null));
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
 
@@ -40,8 +41,8 @@ public class CentroEsportivoController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (DataIntegrityViolationException dive){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Error", null, null));
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
 }

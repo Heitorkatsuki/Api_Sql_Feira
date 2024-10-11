@@ -6,6 +6,7 @@ import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.QueryTimeoutException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +38,8 @@ public class UsuarioController {
             ApiResponseAthleta response = usuarioService.listarUsuarios();
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                    new ApiResponseAthleta(false,"Não foi possível listar os usuários", null,null)
-            );
+        catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
 
@@ -49,8 +48,8 @@ public class UsuarioController {
         try{
             ApiResponseAthleta response = usuarioService.findByUsernameResponse(username);
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (DataIntegrityViolationException dive) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Error", null, null));
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
 
