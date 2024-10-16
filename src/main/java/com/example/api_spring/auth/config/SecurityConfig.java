@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/usuario/adicionar").permitAll()
+                        .requestMatchers("/api/usuario/listar/username/**").permitAll()
                         .requestMatchers("/api/**").hasRole("USUARIO_PADRAO")
                 )
                 .formLogin(AbstractHttpConfigurer::disable)

@@ -53,6 +53,17 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listar/username/{email}")
+    public ResponseEntity<?> listarUsernamePorEmail(@PathVariable String email){
+        try{
+            Usuario username = usuarioService.findByEmail(email);
+            return ResponseEntity.status(HttpStatus.OK).body(username);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email não está no banco");
+        }
+    }
+
 //    @PostMapping("/adicionarProcedure")
 //    public ResponseEntity<ApiResponse> adicionarUsuarioProcedure(@Valid @RequestBody UsuarioRequest usuarioRequest, BindingResult bindingResult) {
 //        ApiResponse response = new ApiResponse();
