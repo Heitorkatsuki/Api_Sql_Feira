@@ -72,6 +72,13 @@ public class UsuarioService {
     public Usuario findByUsername(String username){
         return usuarioRepository.findByUsername(username);
     }
+
+    public Usuario findByEmail(String email){
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        Usuario username = new Usuario();
+        username.setUsername(usuario.getUsername());
+        return username;
+    }
     public ApiResponseAthleta findByUsernameResponse(String username){
         try{
             Usuario response = usuarioRepository.findByUsername(username);
