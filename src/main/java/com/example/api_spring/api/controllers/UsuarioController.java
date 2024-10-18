@@ -54,12 +54,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/listar/username/{email}")
-    public ResponseEntity<ApiResponseAthleta> listarUsuarioPorEmail(@PathVariable String email){
+    public ResponseEntity<?> listarUsernamePorEmail(@PathVariable String email){
         try{
-            ApiResponseAthleta response = usuarioService.findByEmail(email);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
+            Usuario username = usuarioService.findByEmail(email);
+            return ResponseEntity.status(HttpStatus.OK).body(username);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email não está no banco");
         }
     }
 
