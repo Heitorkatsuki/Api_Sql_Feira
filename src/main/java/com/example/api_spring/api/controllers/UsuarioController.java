@@ -53,7 +53,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/listar/{email}")
+    @GetMapping("/listar/username/{email}")
     public ResponseEntity<ApiResponseAthleta> listarUsuarioPorEmail(@PathVariable String email){
         try{
             ApiResponseAthleta response = usuarioService.findByEmail(email);
