@@ -46,7 +46,7 @@ public class AuthController {
                             .compact();
 
                     logger.info("Token gerado: {}", token);
-                    return ResponseEntity.status(HttpStatus.OK).body(Map.of("token", "Bearer " + token,"usuario", usuario));
+                    return ResponseEntity.status(HttpStatus.OK).body(Map.of("token", "Bearer " + token));
                 } catch (Exception e) {
                     logger.error("Erro ao gerar o token JWT: ", e);
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao gerar o token JWT: " + e);
