@@ -58,8 +58,8 @@ public class UsuarioController {
         try{
             ApiResponseAthleta response = usuarioService.findByEmail(email);
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (QueryTimeoutException qte){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
 

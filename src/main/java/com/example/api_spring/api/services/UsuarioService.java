@@ -93,11 +93,11 @@ public class UsuarioService {
             if(response != null){
                 List<Object> usuarioList = new ArrayList<>();
                 usuarioList.add(response);
-                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", usuarioList, null);
+                return new ApiResponseAthleta(true, "Usuário encontrado com sucesso", usuarioList, null);
             }
-            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, null);
+            return new ApiResponseAthleta(false, "Usuário não existe no banco não existe no banco", null, null);
         } catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
+            return new ApiResponseAthleta(false, "Não foi possível recuperar o usuário", null, null);
         }
     }
 
