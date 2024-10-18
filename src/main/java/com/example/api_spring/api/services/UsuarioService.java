@@ -87,18 +87,11 @@ public class UsuarioService {
         }
     }
 
-    public ApiResponseAthleta findByEmail(String email){
-        try{
-            Usuario response = usuarioRepository.findByEmail(email);
-            if(response != null){
-                List<Object> usuarioList = new ArrayList<>();
-                usuarioList.add(response);
-                return new ApiResponseAthleta(true, "Usuário encontrado com sucesso", usuarioList, null);
-            }
-            return new ApiResponseAthleta(false, "Usuário não existe no banco não existe no banco", null, null);
-        } catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível recuperar o usuário", null, null);
-        }
+    public Usuario findByEmail(String email){
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        Usuario username = new Usuario();
+        username.setUsername(usuario.getUsername());
+        return username;
     }
 
     public Usuario findByRoleId(Set<Roles> roles) {
