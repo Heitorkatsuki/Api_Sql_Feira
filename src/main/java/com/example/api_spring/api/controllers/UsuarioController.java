@@ -53,6 +53,16 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listar/{email}")
+    public ResponseEntity<ApiResponseAthleta> listarUsuarioPorEmail(@PathVariable String email){
+        try{
+            ApiResponseAthleta response = usuarioService.findByEmail(email);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
+        }
+    }
+
 //    @PostMapping("/adicionarProcedure")
 //    public ResponseEntity<ApiResponse> adicionarUsuarioProcedure(@Valid @RequestBody UsuarioRequest usuarioRequest, BindingResult bindingResult) {
 //        ApiResponse response = new ApiResponse();
