@@ -52,11 +52,6 @@ public class Usuario {
     @Column(name = "foto_perfil")
     private String fotoPerfil;
 
-    @ManyToMany(fetch = FetchType.EAGER) // coluna nao pode ser nula e deve ser unica
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Roles> roles;
+    @Column(name = "user_role")
+    private Long userRole;
 }
