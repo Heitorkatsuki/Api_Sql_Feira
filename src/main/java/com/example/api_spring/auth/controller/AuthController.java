@@ -1,6 +1,9 @@
 package com.example.api_spring.auth.controller;
 
+import com.example.api_spring.api.models.Role;
 import com.example.api_spring.api.models.Usuario;
+import com.example.api_spring.api.repositories.RoleRepository;
+import com.example.api_spring.api.services.RoleService;
 import com.example.api_spring.api.services.UsuarioInteresseService;
 import com.example.api_spring.api.services.UsuarioService;
 import com.example.api_spring.auth.model.Login;
@@ -25,22 +28,25 @@ public class AuthController {
     private final UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(SecretKey secretKey, UsuarioService usuarioService, PasswordEncoder passwordEncoder) {
+    private final RoleService roleService;
+
+    public AuthController(SecretKey secretKey, UsuarioService usuarioService, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.secretKey = secretKey;
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login login) {
         Usuario usuario = usuarioService.findByUsername(login.getUsername());
         if (usuario != null && passwordEncoder.matches(login.getSenha(), usuario.getSenha())) {
-            Usuario usuarioExiste = usuarioService.findByRoleId(usuario.getRoles());
-            if(usuarioExiste != null){
+            Role usuarioRole = roleService.getUserRoleById(usuario.getUserRole());
+            if(usuarioRole != null){
                 try {
                     String token = Jwts.builder()
                             .setSubject(login.getUsername())
-                            .claim("user_role", usuario.getRoles().iterator().next().getRoleName())
+                            .claim("user_role", usuarioRole.getRoleName())
                             .setExpiration(new Date(System.currentTimeMillis() + 86_400_000))
                             .signWith(secretKey, SignatureAlgorithm.HS512)
                             .compact();

@@ -1,7 +1,7 @@
 package com.example.api_spring.api.services;
 
 import com.example.api_spring.api.models.ApiResponseAthleta;
-import com.example.api_spring.api.models.Roles;
+import com.example.api_spring.api.models.Role;
 import com.example.api_spring.api.models.Usuario;
 import com.example.api_spring.api.repositories.UsuarioRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UsuarioService {
@@ -35,6 +34,7 @@ public class UsuarioService {
     public ApiResponseAthleta cadastrarUsuario(Usuario usuario){
         usuario.setNome(usuario.getNome().strip().toUpperCase());
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+        usuario.setUserRole(2L);
         Usuario usuarioResponse =  usuarioRepository.save(usuario);
         List<Object> usuariosList = new ArrayList<>();
         usuariosList.add(usuarioResponse);
@@ -94,20 +94,12 @@ public class UsuarioService {
         return username;
     }
 
-    public Usuario findByRoleId(Set<Roles> roles) {
-        if (roles != null && !roles.isEmpty()) {
-            Roles role = roles.iterator().next();
-            return usuarioRepository.findByRoleId(role.getId());
-        }
-        return null;
-    }
-
     public ApiResponseAthleta atualizarUsuario(Usuario usuarioNovo, Long id){
         try{
             Usuario usuario = usuarioRepository.findUsuarioByIdUsuario(id);
             usuario.setNome(usuarioNovo.getNome());
             usuario.setEmail(usuarioNovo.getEmail());
-            usuario.setRoles(usuarioNovo.getRoles());
+            usuario.setUserRole(usuarioNovo.getUserRole());
             usuario.setUsername(usuarioNovo.getUsername());
             usuario.setDtNasc(usuarioNovo.getDtNasc());
             usuario.setFotoPerfil(usuarioNovo.getFotoPerfil());
