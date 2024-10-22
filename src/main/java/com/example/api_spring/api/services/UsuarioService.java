@@ -7,7 +7,11 @@ import com.example.api_spring.api.repositories.UsuarioRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,13 +36,22 @@ public class UsuarioService {
     }
 
     public ApiResponseAthleta cadastrarUsuario(Usuario usuario){
-        usuario.setNome(usuario.getNome().strip().toUpperCase());
-        usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-        usuario.setUserRole(2L);
-        Usuario usuarioResponse =  usuarioRepository.save(usuario);
-        List<Object> usuariosList = new ArrayList<>();
-        usuariosList.add(usuarioResponse);
-        return new ApiResponseAthleta(true, "Usuário inserido com sucesso", usuariosList, null);
+        try{
+            usuario.setNome(usuario.getNome().strip().toUpperCase());
+            usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+            usuario.setUserRole(2L);
+            if(maisQueIdadeMinima(usuario.getDtNasc())){
+                Usuario usuarioResponse =  usuarioRepository.save(usuario);
+                List<Object> usuariosList = new ArrayList<>();
+                usuariosList.add(usuarioResponse);
+                return new ApiResponseAthleta(true, "Usuário inserido com sucesso", usuariosList, null);
+            }
+            else {
+                return new ApiResponseAthleta(false, "Usuário não possui a idade mínima de 13 anos", null, "Idade");
+            }
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível inserir o anuncio", null, null);
+        }
     }
 
 //    public ApiResponse cadastrarUsuarioProcedure(Usuario usuario, UsuarioInteresse usuarioInteresse){
@@ -112,4 +125,9 @@ public class UsuarioService {
         }
     }
 
+    public boolean maisQueIdadeMinima(Date dataNasc){
+        LocalDate dataNascLocal = dataNasc.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate dataAtual = LocalDate.now();
+        return Period.between(dataNascLocal,dataAtual).getYears() >= 13;
+    }
 }
