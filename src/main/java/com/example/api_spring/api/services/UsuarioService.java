@@ -112,7 +112,6 @@ public class UsuarioService {
             Usuario usuario = usuarioRepository.findUsuarioByIdUsuario(id);
             usuario.setNome(usuarioNovo.getNome());
             usuario.setEmail(usuarioNovo.getEmail());
-            usuario.setUserRole(usuarioNovo.getUserRole());
             usuario.setUsername(usuarioNovo.getUsername());
             usuario.setDtNasc(usuarioNovo.getDtNasc());
             usuario.setFotoPerfil(usuarioNovo.getFotoPerfil());
