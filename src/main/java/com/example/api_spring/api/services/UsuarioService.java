@@ -69,7 +69,7 @@ public class UsuarioService {
         try {
             Usuario usuario = usuarioRepository.findByEmail(email);
             if (usuario != null){
-                usuario.setSenha(senha);
+                usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
                 Usuario usuarioModificado = usuarioRepository.save(usuario);
                 List<Object> usuarioList = new ArrayList<>();
                 usuarioList.add(usuarioModificado);
