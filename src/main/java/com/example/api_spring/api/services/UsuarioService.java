@@ -37,7 +37,7 @@ public class UsuarioService {
 
     public ApiResponseAthleta cadastrarUsuario(Usuario usuario){
         try{
-            usuario.setNome(usuario.getNome().strip().toUpperCase());
+            usuario.setNome(usuario.getNome().strip());
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
             usuario.setUserRole(2L);
             if(maisQueIdadeMinima(usuario.getDtNasc())){
