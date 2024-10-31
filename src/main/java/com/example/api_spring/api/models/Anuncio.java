@@ -42,5 +42,8 @@ public class Anuncio {
     @Column(name = "id_estado")
     @Schema(description = "Estado onde o anúncio está disponível")
     private Long idEstado;
+
+    @Schema(description = "Imagem do anuncio")
+    private String img;
 }
 
