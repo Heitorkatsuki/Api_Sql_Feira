@@ -65,9 +65,9 @@ public class AnuncioController {
                             content = @Content)
             })
     @GetMapping("/listar/{id}")
-    public ResponseEntity<ApiResponseAthleta> listarAnuncioPorId(@PathVariable String id){
+    public ResponseEntity<ApiResponseAthleta> listarAnuncioPorId(@PathVariable Long id){
         try {
-            ApiResponseAthleta response = anuncioService.listarAnuncioPorId(Long.parseLong(id));
+            ApiResponseAthleta response = anuncioService.listarAnuncioPorId(id);
             if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
