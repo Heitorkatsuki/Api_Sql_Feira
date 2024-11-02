@@ -21,11 +21,12 @@ public class ForumController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<ApiResponseAthleta> listarForuns(){
+    public ResponseEntity<ApiResponseAthleta> listarForuns(@RequestParam(defaultValue = "0") int pagina,
+                                                           @RequestParam(defaultValue = "10") int tamanho){
         try{
-            ApiResponseAthleta response = forumService.listarForuns();
+            ApiResponseAthleta response = forumService.listarForuns(pagina,tamanho);
             if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (QueryTimeoutException qte){
@@ -37,8 +38,8 @@ public class ForumController {
     public ResponseEntity<ApiResponseAthleta> listarForunsPorNome(@PathVariable String nome){
         try {
             ApiResponseAthleta response = forumService.listarForunsPorNome(nome);
-            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            if(!response.isResponseSucessfull()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (QueryTimeoutException qte){

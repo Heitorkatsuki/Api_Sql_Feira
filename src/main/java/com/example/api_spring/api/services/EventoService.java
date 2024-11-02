@@ -3,6 +3,10 @@ package com.example.api_spring.api.services;
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Evento;
 import com.example.api_spring.api.repositories.EventoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,9 +21,11 @@ public class EventoService {
         this.eventoRepository = eventoRepository;
     }
 
-    public ApiResponseAthleta listarEventos(){
+    public ApiResponseAthleta listarEventos(int pagina, int tamanho){
         try{
-            List<Evento> eventoList = eventoRepository.findAll();
+            Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by(Sort.Direction.DESC, "data"));
+            Page<Evento> pageableList = eventoRepository.findAll(pageable);
+            List<Evento> eventoList = pageableList.getContent();
             if (!eventoList.isEmpty()){
                 List<Object> listaObjetos = eventoList.stream()
                         .map(evento -> (Object) evento)
