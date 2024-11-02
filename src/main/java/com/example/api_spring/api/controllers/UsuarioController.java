@@ -44,9 +44,19 @@ public class UsuarioController {
     }
 
     @GetMapping("/listar/{username}")
-    public ResponseEntity<ApiResponseAthleta> listarUsuarioPorId(@PathVariable String username){
+    public ResponseEntity<ApiResponseAthleta> listarUsuarioPorUsername(@PathVariable String username){
         try{
             ApiResponseAthleta response = usuarioService.findByUsernameResponse(username);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
+        }
+    }
+
+    @GetMapping("listarporid/{id}")
+    public ResponseEntity<ApiResponseAthleta> listarUsuarioPorId(@PathVariable String id){
+        try{
+            ApiResponseAthleta response = usuarioService.findById(id);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (QueryTimeoutException qte){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
