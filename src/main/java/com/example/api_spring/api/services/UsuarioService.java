@@ -86,17 +86,30 @@ public class UsuarioService {
         return usuarioRepository.findByUsername(username);
     }
 
+    public ApiResponseAthleta findById(String id){
+        try {
+            Usuario response = usuarioRepository.findUsuarioByIdUsuario(Long.parseLong(id));
+            if(response != null){
+                List<Object> anuncioList = new ArrayList<>();
+                anuncioList.add(response);
+                return new ApiResponseAthleta(true, "Usuario pego com sucesso", anuncioList, null);
+            }
+            return new ApiResponseAthleta(false, "Usuario não existe no banco", null, null);
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível pegar o usuario", null, null);
+        }
+    }
     public ApiResponseAthleta findByUsernameResponse(String username){
         try{
             Usuario response = usuarioRepository.findByUsername(username);
             if(response != null){
                 List<Object> anuncioList = new ArrayList<>();
                 anuncioList.add(response);
-                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
+                return new ApiResponseAthleta(true, "Usuario pego com sucesso", anuncioList, null);
             }
-            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, null);
+            return new ApiResponseAthleta(false, "Usuario não existe no banco", null, null);
         } catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
+            return new ApiResponseAthleta(false, "Não foi possível pegar o usuario", null, null);
         }
     }
 
