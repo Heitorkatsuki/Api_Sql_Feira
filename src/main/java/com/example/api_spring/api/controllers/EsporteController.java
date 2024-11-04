@@ -38,7 +38,7 @@ public class EsporteController {
     @GetMapping("/listar/{id}")
     public ResponseEntity<ApiResponseAthleta> listarEsportePorId(@PathVariable Long id){
         try {
-            ApiResponseAthleta response = esporteService.listarAnuncioPorId(id);
+            ApiResponseAthleta response = esporteService.listarEsportePorId(id);
             if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
