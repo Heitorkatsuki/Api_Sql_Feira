@@ -21,11 +21,12 @@ public class EventoController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<ApiResponseAthleta> listarEventos(){
+    public ResponseEntity<ApiResponseAthleta> listarEventos(@RequestParam(defaultValue = "0") int pagina,
+                                                            @RequestParam(defaultValue = "10") int tamanho){
         try{
-            ApiResponseAthleta response = eventoService.listarEventos();
+            ApiResponseAthleta response = eventoService.listarEventos(pagina,tamanho);
             if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (QueryTimeoutException qte){
@@ -38,7 +39,7 @@ public class EventoController {
         try{
             ApiResponseAthleta response = eventoService.listarEventoPorNome(nome);
             if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (QueryTimeoutException qte){

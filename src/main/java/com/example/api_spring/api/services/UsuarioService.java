@@ -1,7 +1,6 @@
 package com.example.api_spring.api.services;
 
 import com.example.api_spring.api.models.ApiResponseAthleta;
-import com.example.api_spring.api.models.Role;
 import com.example.api_spring.api.models.Usuario;
 import com.example.api_spring.api.repositories.UsuarioRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -99,6 +98,7 @@ public class UsuarioService {
             return new ApiResponseAthleta(false, "Não foi possível pegar o usuario", null, null);
         }
     }
+
     public ApiResponseAthleta findByUsernameResponse(String username){
         try{
             Usuario response = usuarioRepository.findByUsername(username);

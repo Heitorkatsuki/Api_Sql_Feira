@@ -3,6 +3,10 @@ package com.example.api_spring.api.services;
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Forum;
 import com.example.api_spring.api.repositories.ForumRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,9 +21,11 @@ public class ForumService {
         this.forumRepository = forumRepository;
     }
 
-    public ApiResponseAthleta listarForuns(){
+    public ApiResponseAthleta listarForuns(int pagina, int tamanho){
         try {
-            List<Forum> forumList = forumRepository.findAll();
+            Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by(Sort.Direction.DESC, "data"));
+            Page<Forum> pageableList = forumRepository.findAll(pageable);
+            List<Forum> forumList = pageableList.getContent();
             if (!forumList.isEmpty()){
                 List<Object> listaObjetos = forumList.stream()
                         .map(forum -> (Object) forum)
@@ -34,7 +40,8 @@ public class ForumService {
 
     public ApiResponseAthleta listarForunsPorNome(String nome){
         try {
-            List<Forum> forumList = forumRepository.findAllByNome(nome);
+            System.out.println("Buscando fóruns com o nome: " + nome);
+            List<Forum> forumList = forumRepository.findAllByNomeIgnoreCase(nome);
             if (!forumList.isEmpty()){
                 List<Object> listaObjetos = forumList.stream()
                         .map(forum -> (Object) forum)

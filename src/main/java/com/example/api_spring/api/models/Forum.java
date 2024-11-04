@@ -35,4 +35,6 @@ public class Forum {
     @Column(name = "img_forum")
     @Size(max = 500)
     private String imgForum;
+
+    private int seguidores;
 }
