@@ -23,7 +23,7 @@ public class ForumService {
 
     public ApiResponseAthleta listarForuns(int pagina, int tamanho){
         try {
-            Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by(Sort.Direction.DESC, "data"));
+            Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by(Sort.Direction.DESC, "seguidores"));
             Page<Forum> pageableList = forumRepository.findAll(pageable);
             List<Forum> forumList = pageableList.getContent();
             if (!forumList.isEmpty()){
