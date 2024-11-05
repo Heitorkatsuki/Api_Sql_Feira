@@ -37,17 +37,7 @@ public class VendedorService {
         }
     }
 
-    public ApiResponseAthleta findById(Long id){
-        try {
-            Vendedor response = vendedorRepository.findVendedorByIdUsuario(id);
-            if(response != null){
-                List<Object> vendedorList = new ArrayList<>();
-                vendedorList.add(response);
-                return new ApiResponseAthleta(true, "Vendedor pego com sucesso", vendedorList, null);
-            }
-            return new ApiResponseAthleta(false, "Vendedor não existe no banco", null, null);
-        } catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível pegar o vendedor", null, null);
-        }
+    public Boolean checarVendedor(Long id){
+        return vendedorRepository.existsById(id);
     }
 }

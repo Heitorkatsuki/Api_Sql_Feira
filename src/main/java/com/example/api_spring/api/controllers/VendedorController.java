@@ -40,5 +40,9 @@ public class VendedorController {
         } catch (QueryTimeoutException qte){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
+    @GetMapping("/existe/{id}")
+    public Boolean checarVendedorExiste(@PathVariable Long id) {
+        boolean exists = vendedorService.checarVendedor(id);
+        return exists;
     }
 }
