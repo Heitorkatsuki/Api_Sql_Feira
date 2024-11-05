@@ -23,7 +23,7 @@ public class EventoService {
 
     public ApiResponseAthleta listarEventos(int pagina, int tamanho){
         try{
-            Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by(Sort.Direction.DESC, "data"));
+            Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by(Sort.Direction.DESC, "dtEvento"));
             Page<Evento> pageableList = eventoRepository.findAll(pageable);
             List<Evento> eventoList = pageableList.getContent();
             if (!eventoList.isEmpty()){

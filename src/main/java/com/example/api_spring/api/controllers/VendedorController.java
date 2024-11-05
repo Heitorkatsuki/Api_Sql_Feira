@@ -4,6 +4,7 @@ package com.example.api_spring.api.controllers;
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Usuario;
 import com.example.api_spring.api.models.Vendedor;
+import com.example.api_spring.api.services.UsuarioService;
 import com.example.api_spring.api.services.VendedorService;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/vendedor")
+@RequestMapping("/api/vendedor")
 public class VendedorController {
     private final VendedorService vendedorService;
 
@@ -48,3 +49,4 @@ public class VendedorController {
         }
     }
 }
+
