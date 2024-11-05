@@ -40,4 +40,11 @@ public class VendedorService {
     public Boolean checarVendedor(Long id){
         return vendedorRepository.existsById(id);
     }
+
+    public Vendedor findVendedorByIdUsuario(Long idUsuario){
+        Vendedor vendedor = vendedorRepository.findVendedorByIdUsuario(idUsuario);
+        Vendedor telefone = new Vendedor();
+        telefone.setTelefone(vendedor.getTelefone());
+        return telefone;
+    }
 }

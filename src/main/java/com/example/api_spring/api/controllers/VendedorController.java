@@ -37,5 +37,16 @@ public class VendedorController {
         boolean exists = vendedorService.checarVendedor(id);
         return exists;
     }
+
+    @GetMapping("/listar/telefone/{id}")
+    public ResponseEntity<?> listarTelefonePorId(@PathVariable Long id){
+        try{
+            Vendedor telefone = vendedorService.findVendedorByIdUsuario(id);
+            return ResponseEntity.status(HttpStatus.OK).body(telefone);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não está no banco");
+        }
+    }
 }
 
