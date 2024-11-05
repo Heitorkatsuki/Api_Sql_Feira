@@ -32,17 +32,10 @@ public class VendedorController {
         }
     }
 
-    @GetMapping("/listar/{id}")
-    public ResponseEntity<ApiResponseAthleta> listarUsuarioPorId(@PathVariable Long id){
-        try{
-            ApiResponseAthleta response = vendedorService.findById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (QueryTimeoutException qte){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
-        }
     @GetMapping("/existe/{id}")
     public Boolean checarVendedorExiste(@PathVariable Long id) {
         boolean exists = vendedorService.checarVendedor(id);
         return exists;
     }
 }
+
