@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/vendedor")
+@RequestMapping("/api/vendedor")
 public class VendedorController {
     private final VendedorService vendedorService;
 
@@ -32,7 +32,7 @@ public class VendedorController {
         }
     }
 
-    @GetMapping("listar/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<ApiResponseAthleta> listarUsuarioPorId(@PathVariable Long id){
         try{
             ApiResponseAthleta response = vendedorService.findById(id);

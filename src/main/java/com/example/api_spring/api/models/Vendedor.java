@@ -2,9 +2,7 @@ package com.example.api_spring.api.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -25,16 +23,16 @@ public class Vendedor {
     private String cpf;
 
     @NotNull
-    @Email
     @Size(max = 255, message = "Seu endereco deve conter no maximo 255 caracteres")
     private String endereco;
 
     @NotNull
-    @Size(max = 8, message = "Seu cep deve conter no máximo 8 caracteres")
+    @Size(max = 9, message = "Seu cep deve conter no máximo 8 caracteres")
     private String cep;
 
     @NotNull
-    @Size(max = 4, message = "Seu numero deve conter no máximo 4 caracteres")
+    @Min(1)
+    @Max(9999)
     private int numero;
 
     @NotNull
