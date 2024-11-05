@@ -2,6 +2,7 @@ package com.example.api_spring.api.controllers;
 
 
 import com.example.api_spring.api.models.ApiResponseAthleta;
+import com.example.api_spring.api.models.Usuario;
 import com.example.api_spring.api.models.Vendedor;
 import com.example.api_spring.api.services.VendedorService;
 import jakarta.validation.Valid;
@@ -34,5 +35,16 @@ public class VendedorController {
     public Boolean checarVendedorExiste(@PathVariable Long id) {
         boolean exists = vendedorService.checarVendedor(id);
         return exists;
+    }
+
+    @GetMapping("/listar/telefone/{id}")
+    public ResponseEntity<?> listarTelefonePorId(@PathVariable Long id){
+        try{
+            Vendedor telefone = vendedorService.findVendedorByIdUsuario(id);
+            return ResponseEntity.status(HttpStatus.OK).body(telefone);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não está no banco");
+        }
     }
 }
