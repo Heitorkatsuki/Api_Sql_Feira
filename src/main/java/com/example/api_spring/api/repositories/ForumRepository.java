@@ -19,6 +19,6 @@ public interface ForumRepository extends JpaRepository<Forum,Long> {
     Forum findForumByIdForum(Long id);
     @Modifying
     @Transactional
-    @Query("DELETE FROM Anuncio a WHERE a.idAnuncio = :id")
+    @Query("DELETE FROM Forum f WHERE f.idForum = :id")
     void deleteForumByIdForum(@Param("id") Long idForum);
 }
