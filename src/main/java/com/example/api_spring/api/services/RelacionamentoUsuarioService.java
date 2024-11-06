@@ -34,12 +34,12 @@ public class RelacionamentoUsuarioService {
         }
     }
 
-    public ApiResponseAthleta pararDeSeguir(Long id) {
+    public SeguidoresResponse pararDeSeguir(Long id) {
         try{
             relacionamentoUsuarioRepository.deleteById(id);
-            return new ApiResponseAthleta(true, "Exclusão feito com sucesso", null, null);
+            return new SeguidoresResponse(false);
         }catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível inserir o relacionamento", null, null);
+            return new SeguidoresResponse(true);
         }
     }
 

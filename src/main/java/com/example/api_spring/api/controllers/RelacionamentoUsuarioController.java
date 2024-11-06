@@ -31,12 +31,12 @@ public class RelacionamentoUsuarioController {
     }
 
     @DeleteMapping("/seguir/{id}")
-    public ResponseEntity<ApiResponseAthleta> pararDeSeguir(@PathVariable String id){
+    public ResponseEntity<SeguidoresResponse> pararDeSeguir(@PathVariable String id){
         try {
-            ApiResponseAthleta response = relacionamentoUsuarioService.pararDeSeguir(Long.parseLong(id));
+            SeguidoresResponse response = relacionamentoUsuarioService.pararDeSeguir(Long.parseLong(id));
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (DataIntegrityViolationException dive) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body( new ApiResponseAthleta(false, "Error", null, null));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body( new SeguidoresResponse(true));
         }
     }
 
