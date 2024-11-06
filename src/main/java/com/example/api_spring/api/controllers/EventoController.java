@@ -47,6 +47,19 @@ public class EventoController {
         }
     }
 
+    @GetMapping("/listar/organizador/{id}")
+    public ResponseEntity<ApiResponseAthleta> listarEventosPorOrganizador(@PathVariable int id){
+        try{
+            ApiResponseAthleta response = eventoService.listarEventosPorOrganizador(id);
+            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
+        }
+    }
+
     @PostMapping("/inserir")
     public ResponseEntity<ApiResponseAthleta> inserirEvento(@Valid @RequestBody Evento evento){
         try {

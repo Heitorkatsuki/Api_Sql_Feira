@@ -1,5 +1,6 @@
 package com.example.api_spring.api.repositories;
 
+import com.example.api_spring.api.models.Anuncio;
 import com.example.api_spring.api.models.Forum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,4 +13,5 @@ public interface ForumRepository extends JpaRepository<Forum,Long> {
     void deleteForumByIdForum(Long idForum);
     List<Forum> findAllByNomeIgnoreCase(String nome);
     Page<Forum> findAll(Pageable pageable);
+    Forum findForumByIdForum(Long id);
 }

@@ -53,6 +53,21 @@ public class EventoService {
         }
     }
 
+    public ApiResponseAthleta listarEventosPorOrganizador(int organizador){
+        try{
+            List<Evento> eventoList = eventoRepository.findAllByOrganizador((long) organizador);
+            if (!eventoList.isEmpty()){
+                List<Object> listaObjetos = eventoList.stream()
+                        .map(evento -> (Object) evento)
+                        .toList();
+                return new ApiResponseAthleta(true, "Eventos retornados com sucesso!", listaObjetos, null);
+            }
+            return new ApiResponseAthleta(false, "Não há eventos com este nome no banco", null, "Vazio");
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Falha ao retornar eventos", null, null);
+        }
+    }
+
     public ApiResponseAthleta inserirEvento(Evento evento){
         try{
             Evento eventoResponse = eventoRepository.save(evento);
