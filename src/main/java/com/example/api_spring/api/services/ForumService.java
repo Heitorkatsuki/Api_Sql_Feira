@@ -1,5 +1,6 @@
 package com.example.api_spring.api.services;
 
+import com.example.api_spring.api.models.Anuncio;
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.models.Forum;
 import com.example.api_spring.api.repositories.ForumRepository;
@@ -71,6 +72,20 @@ public class ForumService {
             return new ApiResponseAthleta(true, "Forum excluido com sucesso", null, null);
         }catch (Exception e){
             return new ApiResponseAthleta(false, "Não foi possível forum o evento", null, null);
+        }
+    }
+
+    public ApiResponseAthleta listarForumPorId(Long id){
+        try {
+            Forum response = forumRepository.findForumByIdForum(id);
+            if(response != null){
+                List<Object> anuncioList = new ArrayList<>();
+                anuncioList.add(response);
+                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
+            }
+            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, "Vazio");
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
         }
     }
 }

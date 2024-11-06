@@ -57,13 +57,26 @@ public class ForumController {
         }
     }
 
-    @DeleteMapping("/excluir")
-    public ResponseEntity<ApiResponseAthleta> excluirForum(String id){
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<ApiResponseAthleta> excluirForum(@PathVariable Long id){
         try {
-            ApiResponseAthleta response = forumService.excluir(Long.parseLong(id));
+            ApiResponseAthleta response = forumService.excluir(id);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (DataIntegrityViolationException dive){
             return ResponseEntity.status(HttpStatus.CONFLICT).body( new ApiResponseAthleta(false, "Error", null, null));
+        }
+    }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<ApiResponseAthleta> listarForumPorId(@PathVariable Long id){
+        try {
+            ApiResponseAthleta response = forumService.listarForumPorId(id);
+            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
 }
