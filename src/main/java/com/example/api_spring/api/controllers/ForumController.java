@@ -67,7 +67,7 @@ public class ForumController {
         }
     }
 
-    @GetMapping("/listar/{id}")
+    @GetMapping("/listar/id/{id}")
     public ResponseEntity<ApiResponseAthleta> listarForumPorId(@PathVariable Long id){
         try {
             ApiResponseAthleta response = forumService.listarForumPorId(id);
