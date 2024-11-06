@@ -60,7 +60,7 @@ public class RelacionamentoUsuarioController {
         }
     }
 
-    @GetMapping("/existe")
+    @PostMapping("/existe")
     public ResponseEntity<SeguidoresResponse> seguidores(@RequestBody RelacionamentoUsuario relacionamentoUsuario){
         try {
             SeguidoresResponse response = relacionamentoUsuarioService.relacionamento(relacionamentoUsuario);
