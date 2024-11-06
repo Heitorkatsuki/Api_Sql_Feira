@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface AnuncioRepository extends JpaRepository<Anuncio,Long> {
 
     Anuncio findAnuncioByIdAnuncio(Long id);
@@ -14,4 +16,6 @@ public interface AnuncioRepository extends JpaRepository<Anuncio,Long> {
     @Transactional
     @Query("DELETE FROM Anuncio a WHERE a.idAnuncio = :id")
     void deleteAnuncioByIdAnuncio(@Param("id") Long id);
+
+    List<Anuncio> findAllByIdCategoria(Long id);
 }

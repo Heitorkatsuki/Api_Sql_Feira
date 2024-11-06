@@ -73,6 +73,7 @@ public class EventoService {
             Evento eventoResponse = eventoRepository.save(evento);
             List<Object> eventoList = new ArrayList<>();
             eventoList.add(eventoResponse);
+            eventoRepository.notificarEventoNovo(eventoResponse.getIdEvento(),eventoResponse.getOrganizador());
             return new ApiResponseAthleta(true, "Evento inserido com sucesso", eventoList, null);
         }catch (Exception e){
             return new ApiResponseAthleta(false, "Não foi possível inserir o evento", null, null);

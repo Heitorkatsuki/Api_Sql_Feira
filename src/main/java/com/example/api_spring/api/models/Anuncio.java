@@ -45,5 +45,8 @@ public class Anuncio {
 
     @Schema(description = "Imagem do anuncio")
     private String img;
+
+    @Column(name = "id_categoria")
+    private Long idCategoria;
 }
 

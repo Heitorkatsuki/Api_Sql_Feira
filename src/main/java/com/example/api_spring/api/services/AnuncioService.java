@@ -38,11 +38,11 @@ public class AnuncioService {
             if(response != null){
                 List<Object> anuncioList = new ArrayList<>();
                 anuncioList.add(response);
-                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
+                return new ApiResponseAthleta(true, "Anuncios pego com sucesso", anuncioList, null);
             }
-            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, "Vazio");
+            return new ApiResponseAthleta(false, "Anuncios não existe no banco", null, "Vazio");
         } catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
+            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncios", null, null);
         }
     }
 
@@ -63,6 +63,20 @@ public class AnuncioService {
             return new ApiResponseAthleta(true, "Anuncio excluido com sucesso", null, null);
         }catch (Exception e){
             return new ApiResponseAthleta(false, "Não foi possível excluir o anuncio", null, null);
+        }
+    }
+
+    public ApiResponseAthleta listarPorIdCategoria(Long idCategoria){
+        try{
+            List<Anuncio> response = anuncioRepository.findAllByIdCategoria(idCategoria);
+            if(response != null){
+                List<Object> anuncioList = new ArrayList<>();
+                anuncioList.add(response);
+                return new ApiResponseAthleta(true, "Anuncios pego com sucesso", anuncioList, null);
+            }
+            return new ApiResponseAthleta(false, "Anuncios não existe no banco", null, "Vazio");
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Não foi possível pegar os anuncios", null, null);
         }
     }
 }
