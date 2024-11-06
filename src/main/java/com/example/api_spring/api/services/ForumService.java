@@ -66,9 +66,9 @@ public class ForumService {
         }
     }
 
-    public ApiResponseAthleta excluir(Long id){
+    public ApiResponseAthleta excluir(Long idForum){
         try{
-            forumRepository.deleteForumByIdForum(id);
+            forumRepository.deleteForumByIdForum(idForum);
             return new ApiResponseAthleta(true, "Forum excluido com sucesso", null, null);
         }catch (Exception e){
             return new ApiResponseAthleta(false, "Não foi possível forum o evento", null, null);
