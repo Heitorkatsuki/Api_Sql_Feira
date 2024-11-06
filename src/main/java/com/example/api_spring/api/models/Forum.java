@@ -33,7 +33,6 @@ public class Forum {
     private Long usuarioResp;
 
     @Column(name = "img_forum")
-    @Size(max = 500)
     private String imgForum;
 
     private int seguidores;
