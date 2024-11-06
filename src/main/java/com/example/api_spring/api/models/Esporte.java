@@ -29,4 +29,7 @@ public class Esporte {
     @NotNull
     @Column(name = "como_pratica")
     private String comoPratica;
+
+    @NotNull
+    private String imagem;
 }
