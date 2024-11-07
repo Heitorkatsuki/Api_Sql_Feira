@@ -17,6 +17,6 @@ public class RoleService {
 
     public Role getUserRoleById(Long id) {
         Optional<Role> role = roleRepository.findById(id);
-        return role.orElse(null);  // vai retornar userRole se ele existir, se não retorna null
+        return role.orElse(null);
     }
 }

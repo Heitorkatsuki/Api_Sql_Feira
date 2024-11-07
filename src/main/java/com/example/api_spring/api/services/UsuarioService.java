@@ -53,17 +53,6 @@ public class UsuarioService {
         }
     }
 
-//    public ApiResponse cadastrarUsuarioProcedure(Usuario usuario, UsuarioInteresse usuarioInteresse){
-//        try {
-//            Usuario usuarioResponse = usuarioRepository.inserir_usuario_e_interesse(usuario, usuarioInteresse);
-//            List<Object> usuariosList = new ArrayList<>();
-//            usuariosList.add(usuarioResponse);
-//            return new ApiResponse(true, "Usuário inserido com sucesso", usuariosList, null);
-//        }catch (Exception e){
-//            return new ApiResponse(false, "Usuário ja existe no banco", null, null);
-//        }
-//    }
-
     public ApiResponseAthleta mudarSenha(String email, String senha){
         try {
             Usuario usuario = usuarioRepository.findByEmail(email);

@@ -2,18 +2,18 @@ package com.example.api_spring.api.controllers;
 
 import com.example.api_spring.api.models.ApiResponseAthleta;
 import com.example.api_spring.api.services.EstadoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.dao.DataIntegrityViolationException;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.dao.QueryTimeoutException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/api/estado")
@@ -25,7 +25,7 @@ public class EstadoController {
         this.estadoService = estadoService;
     }
 
-    @Operation(summary = "Listar estados", description = "Retorna todos os estados disponíveis.")
+    @Operation(summary = "Listar estados", description = "Retorna todos os estados disponíveis no sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Estados retornados com sucesso",
                     content = @Content(mediaType = "application/json",
@@ -47,5 +47,4 @@ public class EstadoController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
-
 }

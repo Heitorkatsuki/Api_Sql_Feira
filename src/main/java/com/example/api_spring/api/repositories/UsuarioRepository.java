@@ -18,8 +18,4 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 
     Usuario findUsuarioByIdUsuario(Long idUsuario);
 
-
-
-//    @Procedure
-//    Usuario inserir_usua       nrio_e_interesse(Usuario usuario, UsuarioInteresse usuarioInteresse);
 }

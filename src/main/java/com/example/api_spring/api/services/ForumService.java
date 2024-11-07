@@ -81,11 +81,11 @@ public class ForumService {
             if(response != null){
                 List<Object> anuncioList = new ArrayList<>();
                 anuncioList.add(response);
-                return new ApiResponseAthleta(true, "Anuncio pego com sucesso", anuncioList, null);
+                return new ApiResponseAthleta(true, "Foruns retornados com sucesso!", anuncioList, null);
             }
-            return new ApiResponseAthleta(false, "Anuncio não existe no banco", null, "Vazio");
+            return new ApiResponseAthleta(false, "Não há foruns no banco", null, "Vazio");
         } catch (Exception e){
-            return new ApiResponseAthleta(false, "Não foi possível pegar o anuncio", null, null);
+            return new ApiResponseAthleta(false, "Falha ao retornar foruns", null, null);
         }
     }
 }

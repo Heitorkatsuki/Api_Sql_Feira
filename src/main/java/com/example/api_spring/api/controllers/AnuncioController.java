@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/anuncio")
+@Schema(description = "Controlador de anúncios do sistema Athleta")
 public class AnuncioController {
 
     private final AnuncioService anuncioService;
@@ -38,14 +39,14 @@ public class AnuncioController {
                             content = @Content)
             })
     @GetMapping("/listar")
-    public ResponseEntity<ApiResponseAthleta> listarAnuncios(){
+    public ResponseEntity<ApiResponseAthleta> listarAnuncios() {
         try {
             ApiResponseAthleta response = anuncioService.listarAnuncios();
-            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
+            if (!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (QueryTimeoutException qte){
+        } catch (QueryTimeoutException qte) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
@@ -65,14 +66,14 @@ public class AnuncioController {
                             content = @Content)
             })
     @GetMapping("/listar/{id}")
-    public ResponseEntity<ApiResponseAthleta> listarAnuncioPorId(@PathVariable Long id){
+    public ResponseEntity<ApiResponseAthleta> listarAnuncioPorId(@PathVariable Long id) {
         try {
             ApiResponseAthleta response = anuncioService.listarAnuncioPorId(id);
-            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
+            if (!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (QueryTimeoutException qte){
+        } catch (QueryTimeoutException qte) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
@@ -90,46 +91,59 @@ public class AnuncioController {
                             content = @Content)
             })
     @PostMapping("/inserir")
-    public ResponseEntity<ApiResponseAthleta> inserirAnuncio(@Valid @RequestBody Anuncio anuncio){
+    public ResponseEntity<ApiResponseAthleta> inserirAnuncio(@Valid @RequestBody Anuncio anuncio) {
         try {
             ApiResponseAthleta response = anuncioService.inserirAnuncio(anuncio);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (DataIntegrityViolationException dive) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body( new ApiResponseAthleta(false, "Error", null, null));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Erro", null, null));
         }
     }
 
     @Operation(summary = "Excluir um anúncio",
-            description = "Exclui um anúncio pelo ID fornecido.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Anúncio excluído com sucesso"),
-            @ApiResponse(responseCode = "409", description = "Conflito ao tentar excluir o anúncio"),
-            @ApiResponse(responseCode = "404", description = "Anúncio não encontrado")
-    })
-    @DeleteMapping ("/excluir/{id}")
+            description = "Exclui um anúncio pelo ID fornecido.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Anúncio excluído com sucesso"),
+                    @ApiResponse(responseCode = "409", description = "Conflito ao tentar excluir o anúncio"),
+                    @ApiResponse(responseCode = "404", description = "Anúncio não encontrado")
+            })
+    @DeleteMapping("/excluir/{id}")
     public ResponseEntity<ApiResponseAthleta> excluirAnuncio(
             @Parameter(description = "ID do anúncio a ser excluído", required = true)
-            @PathVariable("id") String idAnuncio){
+            @PathVariable("id") String idAnuncio) {
 
-        try{
+        try {
             ApiResponseAthleta response = anuncioService.excluirPorId(Long.parseLong(idAnuncio));
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        }catch (DataIntegrityViolationException dive){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body( new ApiResponseAthleta(false, "Error", null, null));
+        } catch (DataIntegrityViolationException dive) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Erro", null, null));
         }
     }
 
+    @Operation(summary = "Lista anúncios por categoria",
+            description = "Este endpoint retorna os anúncios de uma categoria específica. Se não houver anúncios na categoria, será retornado um status 404.",
+            parameters = {
+                    @Parameter(name = "id", description = "ID da categoria", required = true)
+            },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Anúncios da categoria listados com sucesso",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ApiResponseAthleta.class))}),
+                    @ApiResponse(responseCode = "404", description = "Nenhum anúncio encontrado na categoria",
+                            content = @Content),
+                    @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                            content = @Content)
+            })
     @GetMapping("/listar/categoria/{id}")
-    public ResponseEntity<ApiResponseAthleta> listarAnunciosPorCatrgoria(@PathVariable String id){
+    public ResponseEntity<ApiResponseAthleta> listarAnunciosPorCategoria(@PathVariable String id) {
         try {
             ApiResponseAthleta response = anuncioService.listarPorIdCategoria(Long.parseLong(id));
-            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
+            if (!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (QueryTimeoutException qte){
+        } catch (QueryTimeoutException qte) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
-
 }
