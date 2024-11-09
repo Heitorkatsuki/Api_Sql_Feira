@@ -23,7 +23,6 @@ public class Notificacao {
     @Schema(description = "ID único da notificação", example = "1")
     private Long idNotificacao;
 
-    @Size(max = 20, message = "O tipo deve conter no máximo 20 caracteres")
     @Schema(description = "Tipo da notificação", maxLength = 20, example = "Alerta")
     private String tipo;
 
