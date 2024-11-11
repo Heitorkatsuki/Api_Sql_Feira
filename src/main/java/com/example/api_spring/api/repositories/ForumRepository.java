@@ -17,6 +17,9 @@ public interface ForumRepository extends JpaRepository<Forum,Long> {
     List<Forum> findAllByNomeIgnoreCase(String nome);
     Page<Forum> findAll(Pageable pageable);
     Forum findForumByIdForum(Long id);
+
+    List<Forum> findAllByUsuarioResp(Long id);
+
     @Modifying
     @Transactional
     @Query("DELETE FROM Forum f WHERE f.idForum = :id")
