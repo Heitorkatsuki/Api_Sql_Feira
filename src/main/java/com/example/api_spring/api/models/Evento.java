@@ -29,7 +29,7 @@ public class Evento {
     @Schema(description = "Nome do evento", maxLength = 40, example = "Copa de Futebol")
     private String nome;
 
-    @Size(max = 300)
+    @Size(max = 2000)
     @Schema(description = "Descrição do evento", maxLength = 300, example = "Evento esportivo para celebrar o futebol local.")
     private String descricao;
 
