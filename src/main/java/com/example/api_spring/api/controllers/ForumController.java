@@ -131,4 +131,18 @@ public class ForumController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
         }
     }
+
+    @GetMapping("/listar/organizador/{organizador}")
+    public ResponseEntity<ApiResponseAthleta> listarForumPorOrganizador(@PathVariable Long id){
+        try {
+            ApiResponseAthleta response = forumService.listarForumPorUsuarioResp(id);
+            if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (QueryTimeoutException qte){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseAthleta(false, "Consulta mais demorada do que o esperado", null, null));
+        }
+    }
+
 }

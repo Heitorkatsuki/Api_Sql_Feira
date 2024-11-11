@@ -88,4 +88,19 @@ public class ForumService {
             return new ApiResponseAthleta(false, "Falha ao retornar foruns", null, null);
         }
     }
+
+    public ApiResponseAthleta listarForumPorUsuarioResp(Long id){
+        try {
+            List<Forum> forumList = forumRepository.findAllByUsuarioResp(id);
+            if (!forumList.isEmpty()){
+                List<Object> listaObjetos = forumList.stream()
+                        .map(forum -> (Object) forum)
+                        .toList();
+                return new ApiResponseAthleta(true, "Foruns retornados com sucesso!", listaObjetos, null);
+            }
+            return new ApiResponseAthleta(false, "Não há foruns no banco", null, "Vazio");
+        } catch (Exception e){
+            return new ApiResponseAthleta(false, "Falha ao retornar foruns", null, null);
+        }
+    }
 }
