@@ -133,9 +133,9 @@ public class ForumController {
     }
 
     @GetMapping("/listar/organizador/{organizador}")
-    public ResponseEntity<ApiResponseAthleta> listarForumPorOrganizador(@PathVariable Long id){
+    public ResponseEntity<ApiResponseAthleta> listarForumPorOrganizador(@PathVariable String organizador){
         try {
-            ApiResponseAthleta response = forumService.listarForumPorUsuarioResp(id);
+            ApiResponseAthleta response = forumService.listarForumPorUsuarioResp(Long.parseLong(organizador));
             if(!response.isResponseSucessfull() && response.getAditionalInformation().equals("Vazio")){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
